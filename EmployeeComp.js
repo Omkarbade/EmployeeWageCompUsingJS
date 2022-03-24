@@ -66,7 +66,7 @@ while(total_empHrs <= MAX_WORKING_HRS_IN_MONTH && total_workingDays < WORKING_DA
     dailyWageArray.push(calculateWage(empHrs))
 }
 empWage = calculateWage(total_empHrs);
-console.log("Total Working days: "+total_workingDays+"  Total working HRS :"+total_empHrs+"  Total Employee wage : "+empWage);
+console.log("Total Working days: "+total_workingDays+"  Total working Hours :"+total_empHrs+"  Total Employee wage : "+empWage);
 
 let totalEmpWage = 0;                  //UC7A  total wage array for travrsal and reduce method
 function sum (empWage)
@@ -74,11 +74,23 @@ function sum (empWage)
     totalEmpWage += empWage;
 }
 dailyWageArray.forEach(sum);
-console.log("Total Working days: "+total_workingDays+"  Total working HRS :"+total_empHrs+"  Total Employee wage : "+totalEmpWage);
+console.log("Total Working days: "+total_workingDays+"  Total working Hours :"+total_empHrs+"  Total Employee wage : "+totalEmpWage);
 
 function TotalWages(totalwages,dailyWage)
 {
     return totalwages + dailyWage;
 }
 console.log("Employee wage with reduce : "+dailyWageArray.reduce(TotalWages,0));
+
+let dayCounter = 0;               ///UC7B show day along with daily wage using array
+
+function mapDayWithWage(dailyempWage)
+
+{
+    dayCounter ++;
+    return dayCounter +" = "+ dailyempWage;
+}
+
+let mapDayWithWageArray = dailyWageArray.map(mapDayWithWage);
+console.log("Daily wage Map :\n"+mapDayWithWageArray);
 
