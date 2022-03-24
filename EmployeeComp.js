@@ -59,15 +59,17 @@ let total_empHrs = 0;                               ///UC5 Cal total working day
 let total_workingDays = 0;         
 let dailyWageArray = new Array();              ///UC6 Array
 let empdailyWageMap = new Map();                ///UC8
-let empdailyHrsMap = new Map();                    ///uc9
+let empdailyHrsMap = new Map();                 //uc9
+let dailyWageAndHrsArray = new Array();                    //UC10
 
-while(total_empHrs <= MAX_WORKING_HRS_IN_MONTH && total_workingDays < WORKING_DAYS_IN_MONTH)
-{
-    total_workingDays++;
-    total_empHrs += getWorkingHrs(checkStatus);
-    dailyWageArray.push(calculateWage(empHrs));
-    empdailyWageMap.set(total_workingDays,calculateWage(empHrs));    ///uc8
-}
+// while(total_empHrs <= MAX_WORKING_HRS_IN_MONTH && total_workingDays < WORKING_DAYS_IN_MONTH)
+// {
+//     total_workingDays++;
+//     total_empHrs += getWorkingHrs(checkStatus);
+//     dailyWageArray.push(calculateWage(empHrs));
+//     empdailyWageMap.set(total_workingDays,calculateWage(empHrs));
+//     dailyHrsMap.set(total_workingDays,getWorkingHrs(checkStatus));     ///uc8
+// }
 empWage = calculateWage(total_empHrs);
 console.log("Total Working days: "+total_workingDays+"  Total working Hours :"+total_empHrs+"  Total Employee wage : "+empWage);
 
@@ -160,4 +162,25 @@ console.log("Full working days: "+fullWorkingDays);
 console.log("Part working days: "+partWorkingDays);
 console.log("Non working days: "+nonWorkingDays);
 
+///UC10 Object Creation
+
+while(total_empHrs <= MAX_WORKING_HRS_IN_MONTH && total_workingDays < WORKING_DAYS_IN_MONTH)
+{
+    total_workingDays++;
+    total_empHrs += getWorkingHrs(checkStatus);
+    dailyWageArray.push(calculateWage(empHrs));
+    dailyWageAndHrsArray.push({
+                    dayNum:total_workingDays,
+                    dailyHrs:empHrs,
+                    dailyWage: calculateWage(empHrs),
+                    toString(){
+                        return '\nDay '+this.dayNum+' =>Working Hrs is  '+this.dailyHrs+'  daily wage '+this.dailyWage
+                    }
+                });
+    empdailyWageMap.set(total_workingDays,calculateWage(empHrs));
+    empdailyHrsMap.set(total_workingDays,getWorkingHrs(checkStatus));
+}
+
+
+console.log(" showing Daily worked hr and Daily Wage Earned: "+dailyWageAndHrsArray);
 
