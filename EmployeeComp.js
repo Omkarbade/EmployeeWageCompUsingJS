@@ -105,3 +105,11 @@ console.log(" Daily Wage Filter When Fulltime Wage Earned:\n"+fullDayWageArray);
 ///UC7D find first occurance when full time wage was earn find function
 console.log("First time fulltime wage was earn on day:\n"+mapDayWithWageArray.find(fulltimeWage));
 
+
+function isAllFullTimeWage(dailyempWage)   //UC7E check full time wage is true
+{
+    return dailyempWage.includes("160");
+}
+
+console.log("All elements having full time wage: "+fullDayWageArray.every( isAllFullTimeWage ));
+
