@@ -57,13 +57,15 @@ console.log("Total Work hrs : "+empHrs+"  Total Employee wage for a Month is : "
 
 let total_empHrs = 0;                               ///UC5 Cal total working days
 let total_workingDays = 0;         
-let dailyWageArray = new Array();                ///UC6 Array
+let dailyWageArray = new Array();              ///UC6 Array
+let empdailyWageMap = new Map();                     ///uc8
 
 while(total_empHrs <= MAX_WORKING_HRS_IN_MONTH && total_workingDays < WORKING_DAYS_IN_MONTH)
 {
     total_workingDays++;
     total_empHrs += getWorkingHrs(checkStatus);
-    dailyWageArray.push(calculateWage(empHrs))
+    dailyWageArray.push(calculateWage(empHrs));
+    empdailyWageMap.set(total_workingDays,calculateWage(empHrs));    ///uc8
 }
 empWage = calculateWage(total_empHrs);
 console.log("Total Working days: "+total_workingDays+"  Total working Hours :"+total_empHrs+"  Total Employee wage : "+empWage);
@@ -129,5 +131,8 @@ function TotalWorkedDays(numOfDays,dailyempWage)  //UC7G find no.s of days the e
     }
     return numOfDays;
 }
-
 console.log("Number of days Employee worked: "+dailyWageArray.reduce(TotalWorkedDays,0));
+
+console.log(empdailyWageMap);                                 //UC8 use map to store day wages
+console.log("Employee wage Total Hours :"+Array.from(empdailyWageMap.values()).reduce(TotalWages,0));
+
